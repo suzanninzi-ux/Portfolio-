@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suzan Ninzi - Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-paper: #f4f1ea;
+      --card-bg: #fcfbfa;
+      --text-dark: #2c2825;
+      --text-muted: #6b635b;
+      --accent-coral: #e07a5f;
+      --accent-sage: #81b29a;
+      --accent-cream: #f2cc8f;
+      --accent-navy: #3d405b;
+      --tape-color: rgba(235, 225, 205, 0.7);
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-hand: 'Caveat', cursive;
+      --font-heading: 'Playfair Display', serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-paper);
+      background-image: radial-gradient(#d3cbbe 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 20px 12px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Tape effect */
+    .tape {
+      position: absolute;
+      width: 110px;
+      height: 28px;
+      background: var(--tape-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      z-index: 10;
+      transform: rotate(-3deg);
+    }
+    .tape-top-right { top: -12px; right: 20px; transform: rotate(4deg); }
+    .tape-top-left { top: -12px; left: 20px; transform: rotate(-5deg); }
+
+    /* File loader bar */
+    .uploader-bar {
+      background: #ffffff;
+      border: 2px dashed var(--accent-coral);
+      padding: 16px 20px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .uploader-title {
+      font-family: var(--font-hand);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent-coral);
+    }
+    .upload-btn {
+      background: var(--accent-coral);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+    .upload-btn:hover { background: #d06043; }
+
+    /* Header / Hero */
+    header {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 36px 28px;
+      position: relative;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 24px;
+      align-items: center;
+    }
+    @media(max-width: 850px) {
+      header { grid-template-columns: 1fr; }
+    }
+
+    .hero-title {
+      font-family: var(--font-hand);
+      font-size: 3.8rem;
+      line-height: 1;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .hero-subtitle {
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent-navy);
+      margin-bottom: 16px;
+    }
+    .tagline-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .pill {
+      background: #eae5d9;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .hand-note {
+      font-family: var(--font-hand);
+      font-size: 1.8rem;
+      color: var(--accent-coral);
+      transform: rotate(-2deg);
+    }
+
+    /* Polaroid Frame */
+    .polaroid {
+      background: #ffffff;
+      padding: 12px 12px 24px 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transform: rotate(3deg);
+      position: relative;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .polaroid-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      background: #f0ece1;
+      border-radius: 2px;
+    }
+    .polaroid-caption {
+      font-family: var(--font-hand);
+      font-size: 1.4rem;
+      margin-top: 10px;
+      color: #333;
+    }
+
+    /* Section styling */
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+    .card-title {
+      font-family: var(--font-hand);
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-navy);
+    }
+
+    /* Experience List */
+    .exp-list {
+      list-style: none;
+    }
+    .exp-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+    .exp-list li::before {
+      content: "•";
+      color: var(--accent-coral);
+      font-size: 1.5rem;
+      position: absolute;
+      left: 0;
+      top: -4px;
+    }
+
+    /* Media Cards */
+    .media-card {
+      border: 1px solid #e2ded4;
+      border-radius: 12px;
+      padding: 16px;
+      background: #fff;
+      margin-bottom: 16px;
+    }
+    .media-preview {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      background: #f0ece1;
+      max-height: 380px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .media-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      width: 100%;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .skill-item {
+      background: #f4f0e6;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Contact Footer */
+    footer {
+      background: var(--accent-navy);
+      color: white;
+      padding: 32px 24px;
+      border-radius: 16px;
+      text-align: center;
+      position: relative;
+    }
+    footer h3 {
+      font-family: var(--font-hand);
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      color: var(--accent-cream);
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .contact-links a {
+      color: white;
+      text-decoration: none;
+      background: rgba(255,255,255,0.1);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .hero-title { font-size: 3rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Image Loader Widget -->
+    <div class="uploader-bar">
+      <div>
+        <div class="uploader-title">Load Your 2 Portfolio Photos</div>
+        <div style="font-size: 0.85rem; color: #666;">Select your Ice Cream poster and Flower photo to fill the placeholders</div>
+      </div>
+      <label class="upload-btn">
+        📷 Choose Photo Files
+        <input type="file" id="imageInput" accept="image/*" multiple style="display:none;" onchange="handleImageUpload(event)">
+      </label>
+    </div>
+
+    <!-- Header / Bio -->
+    <header>
+      <div class="tape tape-top-left"></div>
+      <div>
+        <div class="hero-subtitle">Film Production & Animation Student</div>
+        <h1 class="hero-title">Suzan Ninzi</h1>
+        <div class="tagline-pills">
+          <span class="pill">Creative Storytelling</span>
+          <span class="pill">Digital Media</span>
+          <span class="pill">Tourism</span>
+        </div>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px;">
+          I'm a creative and motivated Film Production and Animation student with hands-on experience in digital content production, video editing, and social media management. Passionate about exploring the tourism sector through visuals and using media to showcase real experiences.
+        </p>
+        <div class="hand-note">Let's create something meaningful! ♡</div>
+      </div>
+
+      <!-- Polaroid Flower Preview -->
+      <div class="polaroid">
+        <div class="tape tape-top-right"></div>
+        <img id="headerFlowerImg" class="polaroid-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='240' viewBox='0 0 300 240'><rect width='300' height='240' fill='%23e6d8eb'/><circle cx='150' cy='120' r='60' fill='%23a23b89'/><circle cx='150' cy='120' r='20' fill='%23f4a261'/><text x='150' y='210' font-family='sans-serif' font-size='12' fill='%23666' text-anchor='middle'>Purple Flower Photo Slot</text></svg>" alt="Nature Photography">
+        <div class="polaroid-caption">Nature inspires creativity ♡</div>
+      </div>
+    </header>
+
+    <!-- Content Grid -->
+    <div class="section-grid">
+
+      <!-- About & Experience -->
+      <div class="card">
+        <div class="tape tape-top-left"></div>
+        <h2 class="card-title">📷 About Me & Experience</h2>
+        <p style="font-size: 0.95rem; margin-bottom: 16px;">
+          I enjoy creating engaging content, editing videos, and exploring new opportunities to learn and grow professionally.
+        </p>
+        
+        <div style="background: #f7f4ed; padding: 16px; border-radius: 12px; margin-bottom: 16px;">
+          <h4 style="color: var(--accent-coral);">Radio Africa Group</h4>
+          <div style="font-size: 0.85rem; font-weight: 700; color: #777;">Digital Production Intern | June – Sept 2026</div>
+        </div>
+
+        <ul class="exp-list">
+          <li>Edited and prepared video content for digital platforms.</li>
+          <li>Uploaded YouTube Shorts for Classic FM, Kiss 100, Radio Jambo, Homeboyz Radio & Gukena FM.</li>
+          <li>Edited radio show recordings including <i>Classic Morning Conversations</i>.</li>
+          <li>Assisted with livestreaming Radio Jambo's Ilikuaje show.</li>
+          <li>Supported the preparation of digital content for online audiences.</li>
+        </ul>
+      </div>
+
+      <!-- Skills & Tools -->
+      <div class="card">
+        <div class="tape tape-top-right"></div>
+        <h2 class="card-title">⚙️ Skills & Tools</h2>
+        <div class="skills-grid">
+          <div class="skill-item">🎬 Premiere Pro Editing</div>
+          <div class="skill-item">🎨 Canva Graphic Design</div>
+          <div class="skill-item">📸 Nature Photography</div>
+          <div class="skill-item">📱 Social Media Mgmt</div>
+          <div class="skill-item">🗣️ Communication</div>
+          <div class="skill-item">💡 Creative Storytelling</div>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #ccc;">
+          <h3 style="font-family: var(--font-hand); font-size: 1.8rem; color: var(--accent-navy);">Interest in Tourism</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            Passionate about using digital media and storytelling to promote local culture, destinations, and travel experiences.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Portfolio Projects Section -->
+    <div class="card" style="margin-bottom: 30px;">
+      <h2 class="card-title">🎬 Projects & Work Samples</h2>
+      
+      <div class="section-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-bottom:0;">
+        
+        <!-- Video Editing Sample -->
+        <div class="media-card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Video Editing (Premiere Pro)</h3>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Classic Morning Conversations Radio Show Recording</p>
+          <div class="media-preview">
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/xXRAcsnwd0M" title="Classic Morning Conversations" allowfullscreen></iframe>
+            </div>
+          </div>
+          <a href="https://youtu.be/xXRAcsnwd0M" target="_blank" style="font-size: 0.85rem; color: var(--accent-coral); font-weight: 700; text-decoration: none;">🔗 Watch on YouTube</a>
+        </div>
+
+        <!-- Canva Graphic Design Sample -->
+        <div class="media-card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Graphic Design (Canva)</h3>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Creamy Palace Valentine's Sale Poster</p>
+          <div class="media-preview">
+            <img id="iceCreamImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='380' viewBox='0 0 300 380'><rect width='300' height='380' fill='%23fde2e4'/><path d='M150 100 C100 20, 20 100, 150 250 C280 100, 200 20, 150 100 Z' fill='%23ffb5a7'/><text x='150' y='320' font-family='sans-serif' font-size='13' fill='%23999' text-anchor='middle'>Ice Cream Poster Slot</text></svg>" alt="Ice Cream Poster Design">
+          </div>
+        </div>
+
+        <!-- Photography Sample -->
+        <div class="media-card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Photography Skills</h3>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Macro Water-Drop Flower Photo</p>
+          <div class="media-preview">
+            <img id="flowerImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='380' viewBox='0 0 300 380'><rect width='300' height='380' fill='%23e6d8eb'/><circle cx='150' cy='180' r='70' fill='%23a23b89'/><circle cx='150' cy='180' r='25' fill='%23f4a261'/><text x='150' y='330' font-family='sans-serif' font-size='13' fill='%23888' text-anchor='middle'>Flower Photo Slot</text></svg>" alt="Purple Flower Photography">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer / Contact -->
+    <footer>
+      <h3>Let's build something great together. ♡</h3>
+      <p style="font-size: 0.9rem; opacity: 0.9;">Nairobi, Kenya</p>
+      <div class="contact-links">
+        <a href="mailto:suzanninzi@gmail.com">✉️ suzanninzi@gmail.com</a>
+        <a href="tel:0708168873">📞 0708168873</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function handleImageUpload(event) {
+      const files = event.target.files;
+      if (!files || files.length === 0) return;
+
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const result = e.target.result;
+          const img = new Image();
+          img.src = result;
+          img.onload = function() {
+            if (img.height > img.width * 1.1 && !window.loadedFirst) {
+              document.getElementById('iceCreamImg').src = result;
+              window.loadedFirst = true;
+            } else {
+              document.getElementById('flowerImg').src = result;
+              document.getElementById('headerFlowerImg').src = result;
+            }
+          };
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suzan Ninzi - Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-paper: #f4f1ea;
+      --card-bg: #fcfbfa;
+      --text-dark: #2c2825;
+      --text-muted: #6b635b;
+      --accent-coral: #e07a5f;
+      --accent-sage: #81b29a;
+      --accent-cream: #f2cc8f;
+      --accent-navy: #3d405b;
+      --tape-color: rgba(235, 225, 205, 0.7);
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-hand: 'Caveat', cursive;
+      --font-heading: 'Playfair Display', serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-paper);
+      background-image: radial-gradient(#d3cbbe 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 20px 12px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Tape effect */
+    .tape {
+      position: absolute;
+      width: 110px;
+      height: 28px;
+      background: var(--tape-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      z-index: 10;
+      transform: rotate(-3deg);
+    }
+    .tape-top-right { top: -12px; right: 20px; transform: rotate(4deg); }
+    .tape-top-left { top: -12px; left: 20px; transform: rotate(-5deg); }
+
+    /* File loader bar */
+    .uploader-bar {
+      background: #ffffff;
+      border: 2px dashed var(--accent-coral);
+      padding: 16px 20px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .uploader-title {
+      font-family: var(--font-hand);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent-coral);
+    }
+    .upload-btn {
+      background: var(--accent-coral);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+    .upload-btn:hover { background: #d06043; }
+
+    /* Header / Hero */
+    header {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 36px 28px;
+      position: relative;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 24px;
+      align-items: center;
+    }
+    @media(max-width: 850px) {
+      header { grid-template-columns: 1fr; }
+    }
+
+    .hero-title {
+      font-family: var(--font-hand);
+      font-size: 3.8rem;
+      line-height: 1;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .hero-subtitle {
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent-navy);
+      margin-bottom: 16px;
+    }
+    .tagline-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .pill {
+      background: #eae5d9;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .hand-note {
+      font-family: var(--font-hand);
+      font-size: 1.8rem;
+      color: var(--accent-coral);
+      transform: rotate(-2deg);
+    }
+
+    /* Polaroid Frame */
+    .polaroid {
+      background: #ffffff;
+      padding: 12px 12px 24px 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transform: rotate(3deg);
+      position: relative;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .polaroid-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      background: #f0ece1;
+      border-radius: 2px;
+    }
+    .polaroid-caption {
+      font-family: var(--font-hand);
+      font-size: 1.4rem;
+      margin-top: 10px;
+      color: #333;
+    }
+
+    /* Section styling */
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+    .card-title {
+      font-family: var(--font-hand);
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-navy);
+    }
+
+    /* Experience List */
+    .exp-list {
+      list-style: none;
+    }
+    .exp-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+    .exp-list li::before {
+      content: "•";
+      color: var(--accent-coral);
+      font-size: 1.5rem;
+      position: absolute;
+      left: 0;
+      top: -4px;
+    }
+
+    /* Media Cards */
+    .media-card {
+      border: 1px solid #e2ded4;
+      border-radius: 12px;
+      padding: 16px;
+      background: #fff;
+      margin-bottom: 16px;
+    }
+    .media-preview {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      background: #f0ece1;
+      max-height: 380px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .media-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      width: 100%;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .skill-item {
+      background: #f4f0e6;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Contact Footer */
+    footer {
+      background: var(--accent-navy);
+      color: white;
+      padding: 32px 24px;
+      border-radius: 16px;
+      text-align: center;
+      position: relative;
+    }
+    footer h3 {
+      font-family: var(--font-hand);
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      color: var(--accent-cream);
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .contact-links a {
+      color: white;
+      text-decoration: none;
+      background: rgba(255,255,255,0.1);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .hero-title { font-size: 3rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Image Loader Widget -->
+    <div class="uploader-bar">
+      <div>
+        <div class="uploader-title">Load Your 2 Portfolio Photos</div>
+        <div style="font-size: 0.85rem; color: #666;">Select your Ice Cream poster and Flower photo to fill the placeholders</div>
+      </div>
+      <label class="upload-btn">
+        📷 Choose Photo Files
+        <input type="file" id="imageInput" accept="image/*" multiple style="display:none;" onchange="handleImageUpload(event)">
+      </label>
+    </div>
+
+    <!-- Header / Bio -->
+    <header>
+      <div class="tape tape-top-left"></div>
+      <div>
+        <div class="hero-subtitle">Film Production & Animation Student</div>
+        <h1 class="hero-title">Suzan Ninzi</h1>
+        <div class="tagline-pills">
+          <span class="pill">Creative Storytelling</span>
+          <span class="pill">Digital Media</span>
+          <span class="pill">Tourism</span>
+        </div>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px;">
+          I'm a creative and motivated Film Production and Animation student with hands-on experience in digital content production, video editing, and social media management. Passionate about exploring the tourism sector through visuals and using media to showcase real experiences.
+        </p>
+        <div class="hand-note">Let's create something meaningful! ♡</div>
+      </div>
+
+      <!-- Polaroid Flower Preview -->
+      <div class="polaroid">
+        <div class="tape tape-top-right"></div>
+        <img id="headerFlowerImg" class="polaroid-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='240' viewBox='0 0 300 240'><rect width='300' height='240' fill='%23e6d8eb'/><circle cx='150' cy='120' r='60' fill='%23a23b89'/><circle cx='150' cy='120' r='20' fill='%23f4a261'/><text x='150' y='210' font-family='sans-serif' font-size='12' fill='%23666' text-anchor='middle'>Purple Flower Photo Slot</text></svg>" alt="Nature Photography">
+        <div class="polaroid-caption">Nature inspires creativity ♡</div>
+      </div>
+    </header>
+
+    <!-- Content Grid -->
+    <div class="section-grid">
+
+      <!-- About & Experience -->
+      <div class="card">
+        <div class="tape tape-top-left"></div>
+        <h2 class="card-title">📷 About Me & Experience</h2>
+        <p style="font-size: 0.95rem; margin-bottom: 16px;">
+          I enjoy creating engaging content, editing videos, and exploring new opportunities to learn and grow professionally.
+        </p>
+        
+        <div style="background: #f7f4ed; padding: 16px; border-radius: 12px; margin-bottom: 16px;">
+          <h4 style="color: var(--accent-coral);">Radio Africa Group</h4>
+          <div style="font-size: 0.85rem; font-weight: 700; color: #777;">Digital Production Intern | June – Sept 2026</div>
+        </div>
+
+        <ul class="exp-list">
+          <li>Edited and prepared video content for digital platforms.</li>
+          <li>Uploaded YouTube Shorts for Classic FM, Kiss 100, Radio Jambo, Homeboyz Radio & Gukena FM.</li>
+          <li>Edited radio show recordings including <i>Classic Morning Conversations</i>.</li>
+          <li>Assisted with livestreaming Radio Jambo's Ilikuaje show.</li>
+          <li>Supported the preparation of digital content for online audiences.</li>
+        </ul>
+      </div>
+
+      <!-- Skills & Tools -->
+      <div class="card">
+        <div class="tape tape-top-right"></div>
+        <h2 class="card-title">⚙️ Skills & Tools</h2>
+        <div class="skills-grid">
+          <div class="skill-item">🎬 Premiere Pro Editing</div>
+          <div class="skill-item">🎨 Canva Graphic Design</div>
+          <div class="skill-item">📸 Nature Photography</div>
+          <div class="skill-item">📱 Social Media Mgmt</div>
+          <div class="skill-item">🗣️ Communication</div>
+          <div class="skill-item">💡 Creative Storytelling</div>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #ccc;">
+          <h3 style="font-family: var(--font-hand); font-size: 1.8rem; color: var(--accent-navy);">Interest in Tourism</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            Passionate about using digital media and storytelling to promote local culture, destinations, and travel experiences.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Portfolio Projects Section -->
+    <div class="card" style="margin-bottom: 30px;">
+      <h2 class="card-title">🎬 Projects & Work Samples</h2>
+      
+      <div class="section-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-bottom:0;">
+        
+        <!-- Video Editing Sample -->
+        <div class="media-card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Video Editing (Premiere Pro)</h3>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Classic Morning Conversations Radio Show Recording</p>
+          <div class="media-preview">
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/xXRAcsnwd0M" title="Classic Morning Conversations" allowfullscreen></iframe>
+            </div>
+          </div>
+          <a href="https://youtu.be/xXRAcsnwd0M" target="_blank" style="font-size: 0.85rem; color: var(--accent-coral); font-weight: 700; text-decoration: none;">🔗 Watch on YouTube</a>
+        </div>
+
+        <!-- Canva Graphic Design Sample -->
+        <div class="media-card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Graphic Design (Canva)</h3>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Creamy Palace Valentine's Sale Poster</p>
+          <div class="media-preview">
+            <img id="iceCreamImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='380' viewBox='0 0 300 380'><rect width='300' height='380' fill='%23fde2e4'/><path d='M150 100 C100 20, 20 100, 150 250 C280 100, 200 20, 150 100 Z' fill='%23ffb5a7'/><text x='150' y='320' font-family='sans-serif' font-size='13' fill='%23999' text-anchor='middle'>Ice Cream Poster Slot</text></svg>" alt="Ice Cream Poster Design">
+          </div>
+        </div>
+
+        <!-- Photography Sample -->
+        <div class="media-card">
+          <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Photography Skills</h3>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 12px;">Macro Water-Drop Flower Photo</p>
+          <div class="media-preview">
+            <img id="flowerImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='380' viewBox='0 0 300 380'><rect width='300' height='380' fill='%23e6d8eb'/><circle cx='150' cy='180' r='70' fill='%23a23b89'/><circle cx='150' cy='180' r='25' fill='%23f4a261'/><text x='150' y='330' font-family='sans-serif' font-size='13' fill='%23888' text-anchor='middle'>Flower Photo Slot</text></svg>" alt="Purple Flower Photography">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer / Contact -->
+    <footer>
+      <h3>Let's build something great together. ♡</h3>
+      <p style="font-size: 0.9rem; opacity: 0.9;">Nairobi, Kenya</p>
+      <div class="contact-links">
+        <a href="mailto:suzanninzi@gmail.com">✉️ suzanninzi@gmail.com</a>
+        <a href="tel:0708168873">📞 0708168873</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function handleImageUpload(event) {
+      const files = event.target.files;
+      if (!files || files.length === 0) return;
+
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const result = e.target.result;
+          const img = new Image();
+          img.src = result;
+          img.onload = function() {
+            if (img.height > img.width * 1.1 && !window.loadedFirst) {
+              document.getElementById('iceCreamImg').src = result;
+              window.loadedFirst = true;
+            } else {
+              document.getElementById('flowerImg').src = result;
+              document.getElementById('headerFlowerImg').src = result;
+            }
+          };
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  </script>
+</body>
+</html>
